@@ -1,0 +1,15 @@
+﻿ 
+@{
+    ViewData["Title"] = " Bienvenido";
+}
+
+<section class="container-fluid">
+    <div class="d-flex justify-content-center">
+        <h1>¡Bienvenido!</h1>
+        <div>
+            <a type="button" class="btn btn-primary" asp-controller="Auth" asp-action="Login">Ingresar</a>
+            <a type="button" class="btn btn-primary" asp-controller="Auth" asp-action="SignIn" disabled>Registrarse</a>
+        </div>  
+    </div>
+</section>
+
