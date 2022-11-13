@@ -10,16 +10,17 @@ namespace DataLayer.EF
     public class ClientContext : DbContext
     {
         public DbSet<User> Users;
+        public DbSet<Rol> Roles;
+        public DbSet<Roles> RolesDeUsuarios;
+
+        public ClientContext(DbContextOptions<ClientContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new UserConfig());
-        }
-        protected override void OnConfiguring (DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder
-                .UseSqlServer(@"SERVER=(localdb)\MSSQLLocalDB;Database=Client; Integrated security=true");
+            modelBuilder.ApplyConfiguration(new RolConfig());
+            modelBuilder.ApplyConfiguration(new RolesConfig());
         }
     }
 }

@@ -18,6 +18,36 @@ namespace DataLayer.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Domain.Entities.Rol", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("descriptor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Rol");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Roles", b =>
+                {
+                    b.Property<int>("RolId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("RolId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Roles");
+                });
+
             modelBuilder.Entity("Domain.Entities.User", b =>
                 {
                     b.Property<int>("Id")
@@ -30,8 +60,42 @@ namespace DataLayer.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Roles", b =>
+                {
+                    b.HasOne("Domain.Entities.Rol", "Rol")
+                        .WithMany()
+                        .HasForeignKey("RolId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Domain.Entities.User", b =>
                 {
+                    b.OwnsOne("Domain.VO.EmailValue", "Email", b1 =>
+                        {
+                            b1.Property<int>("UserId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int")
+                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                            b1.Property<string>("Value")
+                                .HasColumnName("Email")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("UserId");
+
+                            b1.ToTable("User");
+
+                            b1.WithOwner()
+                                .HasForeignKey("UserId");
+                        });
+
                     b.OwnsOne("Domain.VO.PasswordValue", "Password", b1 =>
                         {
                             b1.Property<int>("UserId")

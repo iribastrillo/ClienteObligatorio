@@ -1,5 +1,11 @@
+using AppLayer.Interfaces;
+using AppLayer.UseCases;
+using DataLayer.EF;
+using DataLayer.EF.Repositories;
+using Domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -19,8 +25,13 @@ namespace Cliente
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
             services.AddControllersWithViews();
+
+            services.AddDbContext<ClientContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("production")));
+
+            services.AddScoped<ILogin, UCLogin>();
+            services.AddScoped<IRepositoryUser, UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

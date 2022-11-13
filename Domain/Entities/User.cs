@@ -10,15 +10,23 @@ namespace Domain.Entities
     {
         public UsernameValue Username { get; set; }
         public PasswordValue Password { get; set; }
+        public EmailValue Email { get; set; }
         public int Id { get; set; }
         public User()
         {
 
         }
-        public User (UsernameValue username, PasswordValue password)
+        public User (string username, string password)
         {
-            Username = username;
-            Password = password;
+            Username = new UsernameValue (username);
+            Password = new PasswordValue  (password);
+        }
+
+        public User (string username, string password, string email)
+        {
+            Username = new UsernameValue(username);
+            Password = new PasswordValue(password);
+            Email = new EmailValue(email);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Cliente.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Team()
         {
             return View();
         }

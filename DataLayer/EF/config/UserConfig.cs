@@ -17,6 +17,9 @@ namespace DataLayer.EF.config
             builder.OwnsOne(user => user.Password)
                 .Property(password => password.Value)
                 .HasColumnName("Password");
+            builder.OwnsOne(user => user.Email)
+                .Property(email => email.Value)
+                .HasColumnName("Email");
         }
     }
 }

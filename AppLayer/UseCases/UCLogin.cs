@@ -15,13 +15,14 @@ namespace AppLayer.UseCases
         {
             _repository = repository;
         }
-        public void DoLogin(User user)
+        public User DoLogin(string username, string password)
         {
-            User found = _repository.Find(user);
+            User found = _repository.Find(username, password);
             if (found == null)
             {
                 throw new Exception("Invalid login credentials.");
             }
+            return found;
         }
     }
 }

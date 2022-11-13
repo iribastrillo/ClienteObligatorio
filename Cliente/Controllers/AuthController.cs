@@ -1,13 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AppLayer.Interfaces;
+using Domain.Entities;
+using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Cliente.Controllers
 {
     public class AuthController : Controller
     {
+        private ILogin _UCLogin;
+
+        public AuthController (ILogin UCLogin)
+        {
+            _UCLogin = UCLogin;
+        }
         public IActionResult Index()
         {
             return View();
@@ -20,10 +25,14 @@ namespace Cliente.Controllers
         [HttpPost]
         public IActionResult Login (string username, string password)
         {
-            if (username=="Hola" && password == "123")
+            try
             {
-                return View();
+                User user = _UCLogin.DoLogin(username, password);
+            } catch
+            {
+                throw new Exception("Usuario y/o contraseña inválidos.");
             }
+            Console.WriteLine("Éxito!");
             return View("Index", "Home");
         }
     }

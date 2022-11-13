@@ -7,6 +7,6 @@ namespace AppLayer.Interfaces
 {
     public interface ILogin
     {
-        public void DoLogin(User user);
+        public User DoLogin(string username, string password);
     }
 }
