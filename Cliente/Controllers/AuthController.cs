@@ -41,7 +41,7 @@ namespace Cliente.Controllers
                 HttpContext.Session.SetString("username", username);
                 HttpContext.Session.SetString("role", rol.descriptor);
                 return RedirectToAction("Index", "Home");
-            } catch (Exception e)
+            } catch
             {
                 return View();
             }     

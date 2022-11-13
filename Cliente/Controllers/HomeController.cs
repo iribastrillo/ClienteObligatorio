@@ -1,11 +1,11 @@
 ﻿using Cliente.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+using RestSharp;
+using System.Text.Json;
+using Cliente.Models.VMs;
+using System.Collections.Generic;
 
 namespace Cliente.Controllers
 {
@@ -20,6 +20,21 @@ namespace Cliente.Controllers
 
         public IActionResult Index()
         {
+            var client = new RestClient("https://localhost:44348/api/nationalteams");
+            var request = new RestRequest();
+            request.AddHeader("Contet-Type", "application/json");
+            var response = client.Get(request);
+
+            JsonSerializerOptions options = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = true
+            };
+
+            var nationalTeams = JsonSerializer.Deserialize<IEnumerable<NationalTeamViewModel>>(response.Content, options);
+
+            ViewBag.Response = nationalTeams;
+
             return View();
         }
 
