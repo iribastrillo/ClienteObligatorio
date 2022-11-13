@@ -10,5 +10,14 @@ namespace Domain.Entities
         public int UserId { get; set; }
         public Rol Rol { get; set; }
         public User User { get; set; }
+        public Roles ()
+        {
+
+        }
+        public Roles (int role, int user)
+        {
+            RolId = role;
+            UserId = user;
+        }
     }
 }

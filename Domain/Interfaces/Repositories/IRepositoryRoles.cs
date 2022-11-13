@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Domain.Interfaces.Repositories
 {
-    public interface IRepositoryUser : IRepository<User>
+    public interface IRepositoryRoles : IRepository<Roles>
     {
-        public User Find(string username, string password);
+        public void AssignDefaultRole(User user);
     }
 }

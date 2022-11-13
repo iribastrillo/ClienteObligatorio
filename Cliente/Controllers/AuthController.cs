@@ -11,11 +11,13 @@ namespace Cliente.Controllers
     {
         private ILogin _UCLogin;
         private ISignUp _UCSignUp;
+        private IAssignDefault _UCAssignDefault;
 
-        public AuthController (ILogin UCLogin, ISignUp UCSignUp)
+        public AuthController (ILogin UCLogin, ISignUp UCSignUp, IAssignDefault UCAssignDefault)
         {
             _UCLogin = UCLogin;
             _UCSignUp = UCSignUp;
+            _UCAssignDefault = UCAssignDefault;
         }
         public IActionResult Index()
         {
@@ -32,6 +34,7 @@ namespace Cliente.Controllers
             try
             {
                 User user = _UCLogin.DoLogin(username, password);
+                return View("Index", "Home");
             } catch (Exception e)
             {
                 throw new Exception(e.Message);
@@ -51,6 +54,7 @@ namespace Cliente.Controllers
             {
                 User user = UserMapper.ToUser(userVM);
                 _UCSignUp.SignUp(user);
+                _UCAssignDefault.AssignDefaultRole(user);
                 return View ("Index", "Auth");
             } catch (Exception e)
             {

@@ -11,7 +11,7 @@ namespace DataLayer.EF.config
     {
         public void Configure(EntityTypeBuilder<Roles> builder)
         {
-            builder.HasNoKey();
+            builder.HasKey(role => new { role.RolId, role.UserId });
             builder.ToTable("RolesDeUsuarios");
         }
     }

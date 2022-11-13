@@ -32,8 +32,10 @@ namespace Cliente
                 options.UseSqlServer(Configuration.GetConnectionString("production")));
 
             services.AddScoped<IRepositoryUser, UserRepository>();
+            services.AddScoped<IRepositoryRoles, RolesRepository>();
             services.AddScoped<ILogin, UCLogin>();
             services.AddScoped<ISignUp, UCSignUp>();
+            services.AddScoped<IAssignDefault, UCAssignDefaultRole>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
