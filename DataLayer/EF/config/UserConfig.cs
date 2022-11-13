@@ -20,6 +20,7 @@ namespace DataLayer.EF.config
             builder.OwnsOne(user => user.Email)
                 .Property(email => email.Value)
                 .HasColumnName("Email");
+            builder.ToTable("Users");
         }
     }
 }

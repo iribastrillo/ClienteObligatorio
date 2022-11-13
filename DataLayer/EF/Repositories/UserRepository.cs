@@ -17,11 +17,20 @@ namespace DataLayer.EF.Repositories
         }
         public void Create(User o)
         {
-            throw new NotImplementedException();
+            User user = _context.Users.FirstOrDefault(u => u.Email.Value == o.Email.Value);
+            if (user != null)
+            {
+                throw new Exception("User already exists.");
+            }
+            _context.Users.Add(o);
+            _context.SaveChanges();
         }
         public User Find(string username, string password)
         {
-            User user = _context.Users.FirstOrDefault(u => username == u.Username.Value && password == u.Password.Value);          
+            IEnumerable<User> users = from u in _context.Users
+                                      where u.Username.Value == username && u.Password.Value == password
+                                      select u;
+            User user = users.FirstOrDefault();
             return user;
         }
     }

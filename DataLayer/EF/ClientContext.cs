@@ -9,15 +9,14 @@ namespace DataLayer.EF
 {
     public class ClientContext : DbContext
     {
-        public DbSet<User> Users;
-        public DbSet<Rol> Roles;
-        public DbSet<Roles> RolesDeUsuarios;
-
         public ClientContext(DbContextOptions<ClientContext> options) : base(options) { }
-
+        public DbSet<User> Users { get; set; }
+        public DbSet<Rol> Roles { get; set; }
+        public DbSet<Roles> RolesDeUsuarios { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
             modelBuilder.ApplyConfiguration(new UserConfig());
             modelBuilder.ApplyConfiguration(new RolConfig());
             modelBuilder.ApplyConfiguration(new RolesConfig());

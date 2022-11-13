@@ -26,12 +26,14 @@ namespace Cliente
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSession();
 
             services.AddDbContext<ClientContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("production")));
 
-            services.AddScoped<ILogin, UCLogin>();
             services.AddScoped<IRepositoryUser, UserRepository>();
+            services.AddScoped<ILogin, UCLogin>();
+            services.AddScoped<ISignUp, UCSignUp>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,7 +53,7 @@ namespace Cliente
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

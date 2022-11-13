@@ -7,7 +7,7 @@ namespace DataLayer.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Rol",
+                name: "Roles",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -16,11 +16,11 @@ namespace DataLayer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Rol", x => x.Id);
+                    table.PrimaryKey("PK_Roles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -31,11 +31,11 @@ namespace DataLayer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Roles",
+                name: "RolesDeUsuarios",
                 columns: table => new
                 {
                     RolId = table.Column<int>(nullable: false),
@@ -44,40 +44,40 @@ namespace DataLayer.Migrations
                 constraints: table =>
                 {
                     table.ForeignKey(
-                        name: "FK_Roles_Rol_RolId",
+                        name: "FK_RolesDeUsuarios_Roles_RolId",
                         column: x => x.RolId,
-                        principalTable: "Rol",
+                        principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Roles_User_UserId",
+                        name: "FK_RolesDeUsuarios_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Roles_RolId",
-                table: "Roles",
+                name: "IX_RolesDeUsuarios_RolId",
+                table: "RolesDeUsuarios",
                 column: "RolId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Roles_UserId",
-                table: "Roles",
+                name: "IX_RolesDeUsuarios_UserId",
+                table: "RolesDeUsuarios",
                 column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "RolesDeUsuarios");
+
+            migrationBuilder.DropTable(
                 name: "Roles");
 
             migrationBuilder.DropTable(
-                name: "Rol");
-
-            migrationBuilder.DropTable(
-                name: "User");
+                name: "Users");
         }
     }
 }
