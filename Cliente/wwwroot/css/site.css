@@ -3,10 +3,10 @@ for details on configuring this project to bundle and minify static web assets. 
 
 @font-face {
     font-family: Qatar;
-    src: url('../fonts/Qatar2022-Bold.otf');
+    src: url("../fonts/Qatar2022-Bold.otf");
 }
 
-h1 {
+* {
     font-family: Qatar, sans-serif !important;
 }
 

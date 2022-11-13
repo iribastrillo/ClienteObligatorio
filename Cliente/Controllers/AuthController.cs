@@ -2,6 +2,7 @@
 using Cliente.Mapper;
 using Cliente.Models.VMs;
 using Domain.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
@@ -12,12 +13,14 @@ namespace Cliente.Controllers
         private ILogin _UCLogin;
         private ISignUp _UCSignUp;
         private IAssignDefault _UCAssignDefault;
+        private ICheck _UCCheck;
 
-        public AuthController (ILogin UCLogin, ISignUp UCSignUp, IAssignDefault UCAssignDefault)
+        public AuthController (ILogin UCLogin, ISignUp UCSignUp, IAssignDefault UCAssignDefault, ICheck UCCheck)
         {
             _UCLogin = UCLogin;
             _UCSignUp = UCSignUp;
             _UCAssignDefault = UCAssignDefault;
+            _UCCheck = UCCheck;
         }
         public IActionResult Index()
         {
@@ -34,12 +37,20 @@ namespace Cliente.Controllers
             try
             {
                 User user = _UCLogin.DoLogin(username, password);
-                return View("Index", "Home");
+                Rol rol = _UCCheck.Check(user);
+                HttpContext.Session.SetString("username", username);
+                HttpContext.Session.SetString("role", rol.descriptor);
+                return RedirectToAction("Index", "Home");
             } catch (Exception e)
             {
-                throw new Exception(e.Message);
-            }
-            return View("Index", "Home");
+                return View();
+            }     
+        }
+
+        public IActionResult Logout ()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]

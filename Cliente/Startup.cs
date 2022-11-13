@@ -36,6 +36,7 @@ namespace Cliente
             services.AddScoped<ILogin, UCLogin>();
             services.AddScoped<ISignUp, UCSignUp>();
             services.AddScoped<IAssignDefault, UCAssignDefaultRole>();
+            services.AddScoped<ICheck, UCCheck>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
