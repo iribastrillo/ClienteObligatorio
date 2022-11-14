@@ -6,6 +6,7 @@ using RestSharp;
 using System.Text.Json;
 using Cliente.Models.VMs;
 using System.Collections.Generic;
+using Cliente.Filters;
 
 namespace Cliente.Controllers
 {
@@ -18,6 +19,7 @@ namespace Cliente.Controllers
             _logger = logger;
         }
 
+        [LoggedInOnly]
         public IActionResult Index()
         {
             var client = new RestClient("https://localhost:44348/api/nationalteams");
@@ -43,10 +45,12 @@ namespace Cliente.Controllers
             return View();
         }
 
+        [AdminOnly]
         public IActionResult Admin ()
         {
             return View();
         }
+
 
         public IActionResult Team()
         {
