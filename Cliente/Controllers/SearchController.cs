@@ -22,8 +22,12 @@ namespace Cliente.Controllers
                 WriteIndented = true
             };
 
-            var matches = JsonSerializer.Deserialize<IEnumerable<MatchViewModel>>(response.Content, options);
-            return View("Results", matches);
+            if (response.Content != null)
+            {
+                var matches = JsonSerializer.Deserialize<IEnumerable<MatchViewModel>>(response.Content, options);
+                return View("Results", matches);
+            }
+            return View("NoResults");
         }
     }
 }
