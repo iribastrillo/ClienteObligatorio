@@ -50,7 +50,7 @@ namespace Cliente.Controllers
         public IActionResult Logout ()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Auth");
         }
 
         [HttpGet]

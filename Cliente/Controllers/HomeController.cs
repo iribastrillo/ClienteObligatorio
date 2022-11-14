@@ -32,8 +32,14 @@ namespace Cliente.Controllers
             };
 
             var nationalTeams = JsonSerializer.Deserialize<IEnumerable<NationalTeamViewModel>>(response.Content, options);
-
             ViewBag.Response = nationalTeams;
+
+            client = new RestClient("https://localhost:44348/api/groupsstage");
+            response = client.Get(request);
+
+            var groups = JsonSerializer.Deserialize<IEnumerable<GroupStageViewModel>>(response.Content, options);
+
+            ViewBag.Groups = groups;
 
             return View();
         }

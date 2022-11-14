@@ -4,12 +4,10 @@
     ViewData["Title"] = "¡Registrate!";
 }
 
-<h1>Crea un usuario</h1>
-
-<h4></h4>
-<hr />
 <div class="row justify-content-center">
     <div class="col-md-4 text-center">
+        <img class="img-fluid" style="height: 150px" src="~/img/logo.svg" alt="Logo del mundial Qatar 2022" />
+        <h1>¡Registrate!</h1>
         <form asp-action="SignUp">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -28,7 +26,7 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Registrar" class="btn btn-outline-primary btn-block"/>
+                <input type="submit" value="Registrar" class="btn btn-outline-primary btn-block" />
             </div>
         </form>
     </div>

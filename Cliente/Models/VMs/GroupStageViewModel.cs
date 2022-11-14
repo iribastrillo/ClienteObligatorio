@@ -7,5 +7,7 @@ namespace Cliente.Models.VMs
 {
     public class GroupStageViewModel
     {
+        public string group { get; set; }
+        public List<NationalTeamViewModel> nationalTeams { get; set; }
     }
 }
