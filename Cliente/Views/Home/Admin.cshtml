@@ -1,16 +1,16 @@
 ﻿@using Microsoft.AspNetCore.Http
 
 @{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Admin";
 }
 
 <div class="row">
     <div class="col-12 granite text-light py-5">
         <h1>¡Bienvenido,  @Context.Session.GetString("username")!</h1>
-        <p>¡Buscá un partido, poné tu apuesta y ganá!</p>
+        <p>¡Buscá, editá y crea contenido para apostadores!</p>
     </div>
 
-    <div class="col-lg-6 granite p-3 text-white">
+    <div class="col-lg-8 granite p-3 text-white">
         <form class="d-flex flex-column justify-content-center" method="post">
             <div class="form-group">
                 <input type="text" class="form-control" id="query" placeholder="Ingresa el término de búsqueda...">
@@ -31,29 +31,9 @@
         </form>
     </div>
 
-    <div class="col-lg-6 granite text-center">
+    <div class="col-lg-4 granite text-center">
         <figure>
             <img src="~/img/logo.svg" class="img-fluid rounded" />
         </figure>
     </div>
-</div>
-
-<div class="row">
-    @foreach (var item in ViewBag.Groups)
-    {
-        <div class="col-lg-3 my-3">
-            <div class="card granite text-light">
-                <div class="card-body">
-                    <h5 class="card-title">@item.group</h5>
-                    @foreach (var nt in item.nationalTeams)
-                    {
-                        <h6>@nt.name</h6>
-                    }
-                    <a href="#" class="card-link">Más información</a>
-                    <a href="#" class="card-link">Apostar</a>
-                </div>
-            </div>
-        </div>
-    }
-
 </div>

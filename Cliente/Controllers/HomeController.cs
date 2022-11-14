@@ -30,7 +30,6 @@ namespace Cliente.Controllers
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                 WriteIndented = true
             };
-
             var nationalTeams = JsonSerializer.Deserialize<IEnumerable<NationalTeamViewModel>>(response.Content, options);
             ViewBag.Response = nationalTeams;
 
@@ -41,6 +40,11 @@ namespace Cliente.Controllers
 
             ViewBag.Groups = groups;
 
+            return View();
+        }
+
+        public IActionResult Admin ()
+        {
             return View();
         }
 

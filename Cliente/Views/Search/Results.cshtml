@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Cliente.Models.VMs.MatchViewModel>
+
+@{
+    ViewData["Title"] = "Results";
+}
+
+<h1>Results</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.homeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.awayId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.matchResultId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.matchDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.homeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.awayId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.matchResultId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.matchDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
