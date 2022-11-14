@@ -25,5 +25,10 @@ namespace Cliente.Controllers
             var matches = JsonSerializer.Deserialize<IEnumerable<MatchViewModel>>(response.Content, options);
             return View("Results", matches);
         }
+
+        public IActionResult ByIsoOrNationalTeam (string query)
+        {
+            return View();
+        }
     }
 }

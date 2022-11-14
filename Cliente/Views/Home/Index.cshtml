@@ -10,16 +10,31 @@
         <p>¡Buscá un partido, poné tu apuesta y ganá!</p>
     </div>
 
-    <div class="col-lg-6 granite p-3 text-white">
-        <form class="d-flex flex-column justify-content-center" method="post">
-            <div class="form-group">
-                <input type="text" class="form-control" id="query" placeholder="Ingresa el término de búsqueda...">
+    <div class="col-lg-6 granite p-5 text-white">
+        <!-- Búsqueda por ISO o nombre de selección -->
+        <form class="d-flex flex-column justify-content-center" method="post" asp-controller="Search" asp-action="ByIsoOrNationalTeam">
+            <div class="form-group row">
+                <input type="text" class="col-12 form-control form-control-lg" id="query" name="query" placeholder="Ingresa el término de búsqueda...">
+                <input class="btn btn-outline-light btn-block" type="submit" value="Buscar" />
             </div>
-            <input class="btn btn-outline-light btn-block" type="submit" value="Buscar" />
         </form>
+        <!-- Búsqueda por nombre de grupo -->
         <form class="d-flex flex-column justify-content-center" asp-controller="Search" asp-action="ByGroup">
-            <div class="form-group py-1">
-                <select name="name" class="form-select form-control-lg d-block py-1" aria-label="Default select example">
+            <div class="form-group py-1 row">
+                <select name="name" class="form-select form-control-lg d-block py-1 col-12" aria-label="Default select example">
+                    <option selected>Seleccioná un grupo</option>
+                    @foreach (var item in ViewBag.Groups)
+                    {
+                        <option value="@item.group">@item.group</option>
+                    }
+                </select>
+                <input class="btn btn-outline-light btn-block" type="submit" value="Buscar" />
+            </div>
+        </form>
+        <!-- Búsqueda entre dos fechas -->
+        <form class="d-flex flex-column justify-content-center" asp-controller="Search" asp-action="BetweenDates">
+            <div class="form-group py-1 row">
+                <select name="name" class="form-select form-control-lg d-block py-1 col-12" aria-label="Default select example">
                     <option selected>Seleccioná un grupo</option>
                     @foreach (var item in ViewBag.Groups)
                     {
