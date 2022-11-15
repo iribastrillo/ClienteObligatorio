@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Cliente.Models.DTOs
+﻿namespace Cliente.Models.DTOs
 {
     public class GroupStageDTO
     {
+        public string Group { get; set; }
     }
 }

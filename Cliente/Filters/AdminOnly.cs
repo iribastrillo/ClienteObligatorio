@@ -13,7 +13,6 @@ namespace Cliente.Filters
             {
                 context.Result = new RedirectToActionResult("Index", "Home", new { });
             }
-            throw new NotImplementedException();
         }
     }
 }

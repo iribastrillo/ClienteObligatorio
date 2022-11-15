@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Cliente.Filters;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Cliente.Controllers
 {
+    [AdminOnly]
     public class AdminController : Controller
     {
         public IActionResult Index()

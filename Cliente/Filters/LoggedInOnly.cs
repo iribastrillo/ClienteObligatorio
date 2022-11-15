@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Cliente.Filters
 {
-    public class LoggedIn : Attribute, IAuthorizationFilter
+    public class LoggedInOnly : Attribute, IAuthorizationFilter
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
