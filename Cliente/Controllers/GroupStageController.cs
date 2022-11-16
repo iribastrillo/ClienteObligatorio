@@ -28,5 +28,22 @@ namespace Cliente.Controllers
 
             return RedirectToAction("Index", "Admin");
         }
+
+        public IActionResult Delete (int id, string group)
+        {
+            var client = new RestClient("https://localhost:44348/api/groupsstage/" + id);
+            var request = new RestRequest();
+
+            GroupStageDTO groupStage = new GroupStageDTO
+            {
+                Group = group,
+                Id = id
+            };
+
+            request.AddHeader("Content-Type", "application/json");
+            request.AddBody(JsonSerializer.Serialize(groupStage));
+            var response = client.Delete(request);
+            return RedirectToAction("Index", "Admin");
+        }
     }
 }

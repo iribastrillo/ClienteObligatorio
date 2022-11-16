@@ -2,12 +2,21 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 @font-face {
-    font-family: Qatar;
+    font-family: Qatar1;
     src: url("../fonts/Qatar2022-Bold.otf");
 }
 
-* {
-    font-family: Qatar, sans-serif !important;
+@font-face {
+    font-family: Qatar1;
+    src: url("../fonts/Qatar2022-Medium.otf");
+}
+
+h1, h2, h3 {
+    font-family: Qatar1, sans-serif !important;
+}
+
+h4, h5, p {
+    font-family: Qatar2, sans-serif !important;
 }
 
 a.navbar-brand {
