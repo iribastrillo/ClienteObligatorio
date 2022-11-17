@@ -18,13 +18,29 @@
             </p>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="HomeId" class="control-label"></label>
-                <input asp-for="HomeId" class="form-control" />
+                <select class="form-select d-block form-control-lg" asp-for="HomeId">
+                    <option selected></option>
+                    @foreach (var group in ViewBag.Groups)
+                    {
+                        @foreach (var team in group.nationalTeams)
+                        {
+                            <option value="@team.id">@team.name</option>
+                        }
+                    }
+                </select>
                 <span asp-validation-for="HomeId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AwayId" class="control-label"></label>
-                <input asp-for="AwayId" class="form-control" />
+                <select class="form-select d-block form-control-lg" asp-for="AwayId">
+                    <option selected></option>
+                    @foreach (var group in ViewBag.Groups)
+                    {
+                        @foreach (var team in group.nationalTeams)
+                        {
+                            <option value="@team.id">@team.name</option>
+                        }
+                    }
+                </select>
                 <span asp-validation-for="AwayId" class="text-danger"></span>
             </div>
             <div class="form-group">
