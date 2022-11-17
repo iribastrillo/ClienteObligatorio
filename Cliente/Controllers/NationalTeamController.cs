@@ -32,5 +32,20 @@ namespace Cliente.Controllers
 
             return RedirectToAction("Index", "Admin");
         }
+        public IActionResult Update (int id)
+        {
+            var client = new RestClient("https://localhost:44348/api/nationalteams/" + id);
+            var request = new RestRequest();
+            request.AddHeader("Contet-Type", "application/json");
+            var response = client.Get(request);
+
+            JsonSerializerOptions options = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = true
+            };
+            var team = JsonSerializer.Deserialize<NationalTeamViewModel>(response.Content, options);
+            return View(team);
+        }
     }
 }
