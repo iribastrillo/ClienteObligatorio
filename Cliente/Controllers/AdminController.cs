@@ -1,5 +1,4 @@
 ﻿using Cliente.Filters;
-using Cliente.Models.DTOs;
 using Cliente.Models.VMs;
 using Microsoft.AspNetCore.Mvc;
 using RestSharp;

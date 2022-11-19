@@ -7,6 +7,7 @@ using System.Text.Json;
 using Cliente.Models.VMs;
 using System.Collections.Generic;
 using Cliente.Filters;
+using Cliente.Models.VMs.Errors;
 
 namespace Cliente.Controllers
 {
@@ -55,6 +56,11 @@ namespace Cliente.Controllers
         public IActionResult Team()
         {
             return View();
+        }
+
+        public IActionResult BadRequest(BadRequestViewModel request)
+        {
+            return View(request);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

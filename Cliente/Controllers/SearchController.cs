@@ -14,20 +14,28 @@ namespace Cliente.Controllers
             var request = new RestRequest();
             request.AddParameter("Name", name);
             request.AddHeader("Contet-Type", "application/json");
-            var response = client.Get(request);
-
-            JsonSerializerOptions options = new JsonSerializerOptions
+            try
             {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                WriteIndented = true
-            };
+                var response = client.Get(request);
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                    WriteIndented = true
+                };
 
-            if (response.Content != null)
-            {
-                var matches = JsonSerializer.Deserialize<IEnumerable<MatchViewModel>>(response.Content, options);
-                return View("Results", matches);
+                if (response.Content != null)
+                {
+                    var matches = JsonSerializer.Deserialize<IEnumerable<MatchViewModel>>(response.Content, options);
+                    return View("Results", matches);
+                } else
+                {
+                    return View("NoResults");
+                }
             }
-            return View("NoResults");
+            catch
+            {
+                return View("NoResults");
+            }     
         }
 
         public IActionResult ByIsoOrNationalTeam (string query)

@@ -1,10 +1,6 @@
 ﻿using Cliente.Models.VMs;
 using Domain.Entities;
 using Domain.VO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Cliente.Mapper
 {
