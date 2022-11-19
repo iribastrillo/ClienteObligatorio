@@ -1,5 +1,6 @@
 ﻿using Cliente.Models.DTOs;
 using Cliente.Models.VMs;
+using Cliente.Models.VMs.Errors;
 using Microsoft.AspNetCore.Mvc;
 using RestSharp;
 using System;
@@ -21,7 +22,12 @@ namespace Cliente.Controllers
 
             request.AddHeader("Content-Type", "application/json");
             request.AddBody(JsonSerializer.Serialize(groupStage));
-            var response = client.Post(request);
+            RestResponse response = client.ExecutePost(request);
+
+            if(response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+            {
+                return View ("BadRequestError", new BadRequestViewModel { Message = response.Content });
+            }
 
             return RedirectToAction("Index", "Admin");
         }

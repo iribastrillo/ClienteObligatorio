@@ -28,18 +28,13 @@ namespace Cliente.Controllers
             request.AddHeader("Content-Type", "application/json");
             request.AddBody(JsonSerializer.Serialize(match));
 
-            try
+            RestResponse response = client.ExecutePost(request);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
             {
-                RestResponse response = client.Post(request);
-            } catch (HttpRequestException e)
-            {
-                BadRequestViewModel model = new BadRequestViewModel
-                {
-                    Message = e.Message
-                };
-                return View("BadRequestError", model);
+                return View("BadRequestError", new BadRequestViewModel { Message = response.Content });
             }
-            
+
             return RedirectToAction("Index", "Admin");
         }
     }
