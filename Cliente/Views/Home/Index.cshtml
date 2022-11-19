@@ -12,9 +12,9 @@
 
     <div class="col-lg-6 granite p-5 text-white">
         <!-- Búsqueda por ISO o nombre de selección -->
-        <form class="d-flex flex-column justify-content-center" method="post" asp-controller="Search" asp-action="ByIsoOrNationalTeam">
+        <form class="d-flex flex-column justify-content-center" method="post" asp-controller="Search" asp-action="ByIso">
             <div class="form-group row">
-                <input type="text" class="col-12 form-control form-control-lg" id="query" name="query" placeholder="Ingresa el término de búsqueda...">
+                <input type="text" class="col-12 form-control form-control-lg" id="query" name="query" placeholder="Ingrese código ISO-Alfa3">
                 <input class="btn btn-outline-light btn-block" type="submit" value="Buscar" />
             </div>
         </form>
