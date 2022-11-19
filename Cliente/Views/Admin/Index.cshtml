@@ -104,11 +104,13 @@
             <h5>Ingresá una nueva selección</h5>
             <p>Tené en cuenta que el país no debe tener una selección ya asignada.</p>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="CountryId" class="control-label"></label>
-                <input asp-for="CountryId" class="form-control" />
-                <span asp-validation-for="CountryId" class="text-danger"></span>
-            </div>
+            <select class="form-select d-block form-control-lg" asp-for="CountryId">
+                <option selected></option>
+                @foreach (var country in ViewBag.Countries)
+                {
+                        <option value="@country.id">@country.name</option>
+                }
+            </select>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
