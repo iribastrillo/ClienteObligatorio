@@ -17,6 +17,10 @@ namespace DataLayer.EF.Repositories
         public void AssignDefaultRole(User user)
         {
             // Falta implementar: corroborar que el usuario no tiene ese rol ya asignado (no debería).
+            //if (Check(user) != null)
+            //{
+            //    throw new Exception("User already contains the rol.");
+            //}
             Roles rolDeUsuario = new Roles(3, user.Id);
             _context.RolesDeUsuarios.Add(rolDeUsuario);
             _context.SaveChanges();
