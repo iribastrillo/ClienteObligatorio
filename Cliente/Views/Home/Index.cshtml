@@ -12,14 +12,14 @@
 
     <div class="col-lg-6 granite p-5 text-white">
         <!-- Búsqueda por ISO de selección -->
-        <form class="d-flex flex-column justify-content-center" method="post" asp-controller="Search" asp-action="ByIso">
+        <form class="d-flex flex-column justify-content-center" method="get" asp-controller="Search" asp-action="ByIso">
             <div class="form-group row">
                 <input type="text" class="col-12 form-control form-control-lg" id="query" name="query" placeholder="Ingrese código ISO-Alfa3...">
                 <input class="btn btn-outline-light btn-block" type="submit" value="Buscar" />
             </div>
         </form>
         <!-- Búsqueda por nombre de selección -->
-        <form class="d-flex flex-column justify-content-center" method="post" asp-controller="Search" asp-action="ByNationalTeamName">
+        <form class="d-flex flex-column justify-content-center" method="get" asp-controller="Search" asp-action="ByNationalTeamName">
             <div class="form-group row">
                 <input type="text" class="col-12 form-control form-control-lg" id="query" name="query" placeholder="Ingrese nombre de país...">
                 <input class="btn btn-outline-light btn-block" type="submit" value="Buscar" />
@@ -68,7 +68,7 @@
 
                     }
                     <a href="#" class="card-link">Más información</a>
-                    <form method="post" asp-controller="GroupStage" asp-action="GetTableByBroup">
+                    <form method="get" asp-controller="GroupStage" asp-action="GetTableByBroup">
                         <input type="hidden" id="group" name="group" value="@item.group">
                         <input class="btn btn-outline-light btn-block" type="submit" value="Ver Tabla" />
                     </form>
