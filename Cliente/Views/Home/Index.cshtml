@@ -65,9 +65,13 @@
                     @foreach (var nt in item.nationalTeams)
                     {
                         <h6>@nt.name</h6>
+
                     }
                     <a href="#" class="card-link">Más información</a>
-                    <a href="#" class="card-link">Apostar</a>
+                    <form method="post" asp-controller="GroupStage" asp-action="GetTableByBroup">
+                        <input type="hidden" id="group" name="group" value="@item.group">
+                        <input class="btn btn-outline-light btn-block" type="submit" value="Ver Tabla" />
+                    </form>
                 </div>
             </div>
         </div>

@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Cliente.Models.VMs.TableGroupNTsViewModel>
+
+@{
+    ViewData["Title"] = "ByGroup";
+}
+
+<h1>Resultados</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pts)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.goalsScored)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.goalsAgainst)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.yellowCards)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.redCards)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.directRedCards)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pts)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.goalsScored)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.goalsAgainst)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.yellowCards)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.redCards)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.directRedCards)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
