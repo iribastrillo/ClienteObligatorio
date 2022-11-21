@@ -27,5 +27,6 @@ namespace Cliente.Models.VMs
         public string Phone { get; set; }
         [Display(Name = "Apostadores")]
         public int Bettors { get; set; }
+
     }
 }

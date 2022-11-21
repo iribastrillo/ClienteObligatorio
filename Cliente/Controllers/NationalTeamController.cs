@@ -13,13 +13,13 @@ namespace Cliente.Controllers
             var client = new RestClient("https://localhost:44348/api/nationalteams");
             var request = new RestRequest();
 
-            NationalTeamDTO nationalTeam = new NationalTeamDTO
+            NationalTeamViewModel nationalTeam = new NationalTeamViewModel
             {
-                Country = new CountryDTO (admin.CountryId),
-                Name = admin.Name,
-                Phone = admin.Phone,
-                Email = admin.Email,
-                Bettors = 0
+                idCountry = admin.CountryId,
+                name = admin.Name,
+                phone  = admin.Phone,
+                email = admin.Email,
+                bettors = admin.Bettors
             };
 
             request.AddHeader("Content-Type", "application/json");
