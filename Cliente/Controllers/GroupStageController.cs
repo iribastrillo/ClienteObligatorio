@@ -58,25 +58,26 @@ namespace Cliente.Controllers
             request.AddParameter("groupName", group);
             request.AddHeader("Content-Type", "application/json");
 
-            try
+            RestResponse rResponse = client.ExecuteGet(request);
+            if(rResponse.StatusCode == System.Net.HttpStatusCode.BadRequest)
             {
-                var response = client.Get(request);
-                JsonSerializerOptions options = new JsonSerializerOptions
-                {
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                    WriteIndented = true
-                };
-                if(response.Content != null)
-                {
-                    var nts = JsonSerializer.Deserialize<IEnumerable<TableGroupNTsViewModel>>(response.Content, options);
-                    return View("ByGroup", nts);
-                }
-                return View("ByGroup");
-            } 
-            catch
-            {
-                return View("ByGroup");
+                return View("BadRequestError", new BadRequestViewModel { Message = rResponse.Content });
             }
+
+            var response = client.Get(request);
+            JsonSerializerOptions options = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = true
+            };
+            if(response.Content != null)
+            {
+                var nts = JsonSerializer.Deserialize<IEnumerable<TableGroupNTsViewModel>>(response.Content, options);
+                return View("ByGroup", nts);
+            }
+            return View("BadRequestError", new BadRequestViewModel { Message = rResponse.Content });
         }
+
     }
 }
+

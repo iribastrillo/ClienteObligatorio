@@ -1,4 +1,5 @@
 ﻿using Cliente.Models.VMs;
+using Cliente.Models.VMs.Errors;
 using Microsoft.AspNetCore.Mvc;
 using RestSharp;
 using System;
@@ -75,26 +76,27 @@ namespace Cliente.Controllers
             var request = new RestRequest();
             request.AddParameter("countryName", query);
             request.AddHeader("Content-Type", "application/json");
-            try
-            {
-                var response = client.Get(request);
-                JsonSerializerOptions options = new JsonSerializerOptions
-                {
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                    WriteIndented = true
-                };
 
-                if(response.Content != null)
-                {
-                    var matches = JsonSerializer.Deserialize<IEnumerable<MatchViewModel>>(response.Content, options);
-                    return View("Results", matches);
-                }
-                return View("NoResults");
-            } 
-            catch
+            RestResponse rResponse = client.ExecuteGet(request);
+            if(rResponse.StatusCode == System.Net.HttpStatusCode.BadRequest)
             {
-                return View("NoResults");
+                return View("BadRequestError", new BadRequestViewModel { Message = rResponse.Content });
             }
+
+            var response = client.Get(request);
+            JsonSerializerOptions options = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = true
+            };
+
+            if(response.Content != null)
+            {
+                var matches = JsonSerializer.Deserialize<IEnumerable<MatchViewModel>>(response.Content, options);
+                return View("Results", matches);
+            }
+            return View("NoResults");
+ 
         }
 
         public IActionResult BetweenDates(DateTime fromDate, DateTime toDate)

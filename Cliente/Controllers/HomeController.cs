@@ -25,7 +25,7 @@ namespace Cliente.Controllers
         {
             var client = new RestClient("https://localhost:44348/api/nationalteams");
             var request = new RestRequest();
-            request.AddHeader("Contet-Type", "application/json");
+            request.AddHeader("Content-Type", "application/json");
             var response = client.Get(request);
 
             JsonSerializerOptions options = new JsonSerializerOptions

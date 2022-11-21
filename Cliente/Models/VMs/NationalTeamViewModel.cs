@@ -7,6 +7,6 @@
         public string phone { get; set; }
         public string email { get; set; }
         public int bettors { get; set; }
-        public CountryViewModel country { get; set; }
+        public int idCountry { get; set; }
     }
 }
