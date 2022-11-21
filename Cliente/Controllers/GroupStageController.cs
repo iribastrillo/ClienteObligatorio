@@ -41,8 +41,17 @@ namespace Cliente.Controllers
 
             request.AddHeader("Content-Type", "application/json");
             request.AddBody(JsonSerializer.Serialize(groupStage));
-            var response = client.Delete(request);
-            return RedirectToAction("Index", "Admin");
+
+            try
+            {
+                var response = client.Delete(request);
+                return RedirectToAction("Index", "Admin");
+
+            }
+            catch 
+            {
+               return View("BadRequestError", new BadRequestViewModel { Message = "No se puede eliminar el grupo" });
+            }
         }
 
         public IActionResult Update(int id, string group)
