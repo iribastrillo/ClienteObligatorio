@@ -1,7 +1,9 @@
 ﻿using Cliente.Models.DTOs;
 using Cliente.Models.VMs;
+using Cliente.Models.VMs.Errors;
 using Microsoft.AspNetCore.Mvc;
 using RestSharp;
+using System.Net.Http;
 using System.Text.Json;
 
 namespace Cliente.Controllers
@@ -57,5 +59,25 @@ namespace Cliente.Controllers
             return RedirectToAction("Index", "Admin");
 
         }
+<<<<<<< HEAD
+=======
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var client = new RestClient("https://localhost:44348/api/nationalteams/" + id);
+            var request = new RestRequest();
+            request.AddHeader("Content-Type", "application/json");
+            RestResponse response;
+            try
+            {
+                response = client.Delete(request);
+            } catch
+            {
+                return View("BadRequestError", new BadRequestViewModel { Message = "No puedes eliminar un equipo que está en un grupo o tiene partidos asignados." });
+            }
+            
+            return RedirectToAction("Index", "Admin");
+        }
+>>>>>>> master
     }
 }
