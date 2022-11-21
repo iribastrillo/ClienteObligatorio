@@ -45,10 +45,24 @@ namespace Cliente.Controllers
             return RedirectToAction("Index", "Admin");
         }
 
-        public IActionResult Update(int id, string group)
+        public IActionResult Edit(int id, string group)
         {
             GroupStageDTO groupStage = new GroupStageDTO(id, group);
             return View(groupStage);
+        }
+        [HttpPost]
+        public IActionResult Update (int id, string group)
+        {
+            var client = new RestClient("https://localhost:44348/api/groupsstage");
+            var request = new RestRequest();
+            request.AddHeader("Content-Type", "application/json");
+            request.AddBody(JsonSerializer.Serialize(new GroupStageDTO(id, group)));
+            RestResponse response = client.ExecutePut(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+            {
+                return View("BadRequestError", new BadRequestViewModel { Message = response.Content });
+            }
+            return RedirectToAction("Index", "Admin");
         }
         public IActionResult GetTableByBroup(string group)
         {
