@@ -57,5 +57,11 @@ namespace Cliente.Controllers
             return RedirectToAction("Index", "Admin");
 
         }
+        //[HttpPost]
+        //public IActionResult Delete(int id)
+        //{
+        //    var client = new RestClient("https://localhost:44348/api/nationalteams/" + id);
+
+        //}
     }
 }
