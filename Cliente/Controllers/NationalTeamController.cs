@@ -59,8 +59,7 @@ namespace Cliente.Controllers
             return RedirectToAction("Index", "Admin");
 
         }
-<<<<<<< HEAD
-=======
+
         [HttpPost]
         public IActionResult Delete(int id)
         {
@@ -78,6 +77,5 @@ namespace Cliente.Controllers
             
             return RedirectToAction("Index", "Admin");
         }
->>>>>>> master
     }
 }
