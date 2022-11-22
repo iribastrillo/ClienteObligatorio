@@ -12,7 +12,7 @@
         <p>Estos son los partidos que coinciden para la búsqueda</p>
     </div>
 
-    <div class="col-lg-6 granite text-center">
+    <div class="col-12 granite text-center">
         <figure>
             <img src="~/img/logo.svg" class="img-fluid rounded" />
         </figure>
@@ -27,11 +27,9 @@
                 <div class="card-body">
                     <h5 class="card-title">Partido @item.matchDate</h5>
                     <h6>@item.homeCountry VS @item.awayCountry</h6>
-                    <a href="#" class="card-link">Más información</a>
-                    <a href="#" class="card-link">Apostar</a>
                 </div>
             </div>
         </div>
     }
-<a asp-controller="Home" asp-action="Index">Volver</a>
+<a class="btn btn-outline-dark btn-block mx-3" asp-controller="Home" asp-action="Index">Atrás</a>
 </div>
