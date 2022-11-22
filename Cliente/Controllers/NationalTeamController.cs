@@ -59,6 +59,7 @@ namespace Cliente.Controllers
             return RedirectToAction("Index", "Admin");
 
         }
+
         [HttpPost]
         public IActionResult Delete(int id)
         {

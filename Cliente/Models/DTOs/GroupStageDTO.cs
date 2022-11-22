@@ -1,7 +1,10 @@
-﻿namespace Cliente.Models.DTOs
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Cliente.Models.DTOs
 {
     public class GroupStageDTO
     {
+        [Display(Name = "Grupo")]
         public string Group { get; set; }
         public int Id { get; set; }
 
