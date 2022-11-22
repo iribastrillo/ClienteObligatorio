@@ -67,11 +67,14 @@
                         <h6>@nt.name</h6>
 
                     }
-                    <a class="btn btn-outline-light text-light btn-block mb-1">Ver partidos</a>
+                    <form method="get" asp-controller="Search" asp-action="ByGroup" class="mb-1">
+                        <input type="hidden" id="name" name="name" value="@item.group">
+                        <input class="btn btn-outline-light btn-block" type="submit" value="Ver Partidos" />
+                    </form>
                     <form method="get" asp-controller="GroupStage" asp-action="GetTableByBroup">
                         <input type="hidden" id="group" name="group" value="@item.group">
                         <input class="btn btn-outline-light btn-block" type="submit" value="Ver Tabla" />
-                    </form>       
+                    </form>
                 </div>
             </div>
         </div>
