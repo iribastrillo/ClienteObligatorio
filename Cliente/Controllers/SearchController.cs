@@ -1,4 +1,5 @@
-﻿using Cliente.Models.VMs;
+﻿using Cliente.Filters;
+using Cliente.Models.VMs;
 using Cliente.Models.VMs.Errors;
 using Microsoft.AspNetCore.Mvc;
 using RestSharp;
@@ -98,7 +99,7 @@ namespace Cliente.Controllers
             return View("NoResults");
  
         }
-
+        [AdminOrBettorOnly]
         public IActionResult BetweenDates(DateTime fromDate, DateTime toDate)
         {
             string fromStr = fromDate.ToString("yyyy-MM-dd");
