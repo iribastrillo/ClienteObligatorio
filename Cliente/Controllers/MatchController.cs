@@ -5,6 +5,7 @@ using Cliente.Models.VMs.Errors;
 using Microsoft.AspNetCore.Mvc;
 using RestSharp;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
 
