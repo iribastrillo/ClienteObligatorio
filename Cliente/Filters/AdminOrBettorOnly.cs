@@ -10,7 +10,7 @@ namespace Cliente.Filters
         public void OnAuthorization(AuthorizationFilterContext context)
         {
             string role = context.HttpContext.Session.GetString("role");
-            if (role != "Admin" || role != "Apostador")
+            if (role == "Invitado")
             {
                 context.Result = new RedirectToActionResult("Index", "Home", new { });
             }

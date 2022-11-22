@@ -1,4 +1,5 @@
-﻿using Cliente.Models.DTOs;
+﻿using Cliente.Filters;
+using Cliente.Models.DTOs;
 using Cliente.Models.VMs;
 using Cliente.Models.VMs.Errors;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using System.Text.Json;
 
 namespace Cliente.Controllers
 {
+    [AdminOnly]
     public class NationalTeamController : Controller
     {
         public IActionResult Create(AdminViewModel admin)
@@ -26,7 +28,12 @@ namespace Cliente.Controllers
 
             request.AddHeader("Content-Type", "application/json");
             request.AddBody(JsonSerializer.Serialize(nationalTeam));
-            var response = client.Post(request);
+            RestResponse response = client.ExecutePost(request);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+            {
+                return View("BadRequestError", new BadRequestViewModel { Message = "Debes ingresar datos vállidos."});
+            }
 
             return RedirectToAction("Index", "Admin");
         }

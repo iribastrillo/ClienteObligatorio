@@ -11,6 +11,7 @@ namespace Cliente.Controllers
 {
     public class SearchController : Controller
     {
+        [AdminOrBettorOnly]
         public IActionResult ByGroup (string name)
         {
             var client = new RestClient("https://localhost:44348/api/Match/ByGroupName/" + name);
@@ -40,7 +41,7 @@ namespace Cliente.Controllers
                 return View("NoResults");
             }     
         }
-
+        [LoggedInOnly]
         public IActionResult ByIso(string query)
         {
             var client = new RestClient("https://localhost:44348/api/match/byCountryISO/" + query);
@@ -70,7 +71,7 @@ namespace Cliente.Controllers
             } 
 
         }
-
+        [LoggedInOnly]
         public IActionResult ByNationalTeamName(string query)
         {
             var client = new RestClient("https://localhost:44348/api/match/byCountryName/" + query);

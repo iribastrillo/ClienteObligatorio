@@ -1,4 +1,5 @@
-﻿using Cliente.Models.DTOs;
+﻿using Cliente.Filters;
+using Cliente.Models.DTOs;
 using Cliente.Models.VMs;
 using Cliente.Models.VMs.Errors;
 using Microsoft.AspNetCore.Mvc;
@@ -13,10 +14,16 @@ namespace Cliente.Controllers
 {
     public class GroupStageController : Controller
     {
+        [AdminOnly]
         public IActionResult Create(AdminViewModel admin)
         {
             var client = new RestClient("https://localhost:44348/api/groupsstage");
             var request = new RestRequest();
+
+            if (admin.Group == null)
+            {
+                return View("BadRequestError", new BadRequestViewModel { Message = "El código del grupo no puede estar vacío."});
+            }
 
             GroupStageDTO groupStage = new GroupStageDTO (admin.Group);
 
@@ -31,7 +38,7 @@ namespace Cliente.Controllers
 
             return RedirectToAction("Index", "Admin");
         }
-
+        [AdminOnly]
         public IActionResult Delete(int id, string group)
         {
             var client = new RestClient("https://localhost:44348/api/groupsstage/" + id);
@@ -53,12 +60,13 @@ namespace Cliente.Controllers
                return View("BadRequestError", new BadRequestViewModel { Message = "No se puede eliminar el grupo" });
             }
         }
-
+        [AdminOnly]
         public IActionResult Edit(int id, string group)
         {
             GroupStageDTO groupStage = new GroupStageDTO(id, group);
             return View(groupStage);
         }
+        [AdminOnly]
         [HttpPost]
         public IActionResult Update (int id, string group)
         {
@@ -73,6 +81,7 @@ namespace Cliente.Controllers
             }
             return RedirectToAction("Index", "Admin");
         }
+        [LoggedInOnly]
         public IActionResult GetTableByBroup(string group)
         {
             var client = new RestClient("https://localhost:44348/api/groupsStage/byGroup/" + group);

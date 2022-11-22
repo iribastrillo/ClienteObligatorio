@@ -1,4 +1,5 @@
-﻿using Cliente.Models;
+﻿using Cliente.Filters;
+using Cliente.Models;
 using Cliente.Models.DTOs;
 using Cliente.Models.VMs;
 using Cliente.Models.VMs.Errors;
@@ -11,6 +12,7 @@ using System.Text.Json;
 
 namespace Cliente.Controllers
 {
+    [AdminOnly]
     public class MatchController : Controller
     {
         [HttpPost]
@@ -18,6 +20,15 @@ namespace Cliente.Controllers
         {
             var client = new RestClient("https://localhost:44348/api/match");
             var request = new RestRequest();
+            DateTime dateTime;
+
+            try
+            {
+                dateTime = new DateTime(2022, admin.Month, admin.Day, admin.Hour, 0, 0);
+            } catch
+            {
+                return View("BadRequestError", new BadRequestViewModel { Message = "Debes ingresar una fecha válida." });
+            }
 
             MatchDTO match = new MatchDTO
             {

@@ -58,6 +58,7 @@ namespace Cliente.Controllers
             return View();
         }
 
+        [LoggedInOnly]
         public IActionResult BadRequest(BadRequestViewModel request)
         {
             return View(request);
