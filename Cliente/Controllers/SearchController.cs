@@ -100,6 +100,35 @@ namespace Cliente.Controllers
             return View("NoResults");
  
         }
+
+        public IActionResult GetAllMatches()
+        {
+            var client = new RestClient("https://localhost:44348/api/Match/");
+            var request = new RestRequest();
+            request.AddHeader("Content-Type", "application/json");
+
+            RestResponse rResponse = client.ExecuteGet(request);
+            if (rResponse.StatusCode == System.Net.HttpStatusCode.BadRequest)
+            {
+                return View("BadRequestError", new BadRequestViewModel { Message = rResponse.Content });
+            }
+
+            var response = client.Get(request);
+
+            JsonSerializerOptions options = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = true
+            };
+            if (response.Content != null)
+            {
+                var matches = JsonSerializer.Deserialize<IEnumerable<MatchViewModel>>(response.Content, options);
+                return View("Results", matches);
+            }
+            return View("NoResults");
+        }
+
+
         [AdminOrBettorOnly]
         public IActionResult BetweenDates(DateTime fromDate, DateTime toDate)
         {
