@@ -67,11 +67,11 @@
                         <h6>@nt.name</h6>
 
                     }
-                    <a href="#" class="card-link">Más información</a>
+                    <a class="btn btn-outline-light text-light btn-block mb-1">Ver partidos</a>
                     <form method="get" asp-controller="GroupStage" asp-action="GetTableByBroup">
                         <input type="hidden" id="group" name="group" value="@item.group">
                         <input class="btn btn-outline-light btn-block" type="submit" value="Ver Tabla" />
-                    </form>
+                    </form>       
                 </div>
             </div>
         </div>
