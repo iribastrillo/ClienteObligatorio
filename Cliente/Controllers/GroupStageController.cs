@@ -20,6 +20,11 @@ namespace Cliente.Controllers
             var client = new RestClient("https://localhost:44348/api/groupsstage");
             var request = new RestRequest();
 
+            if (admin.Group == null)
+            {
+                return View("BadRequestError", new BadRequestViewModel { Message = "El código del grupo no puede estar vacío."});
+            }
+
             GroupStageDTO groupStage = new GroupStageDTO (admin.Group);
 
             request.AddHeader("Content-Type", "application/json");

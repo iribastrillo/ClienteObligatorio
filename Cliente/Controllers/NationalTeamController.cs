@@ -28,7 +28,12 @@ namespace Cliente.Controllers
 
             request.AddHeader("Content-Type", "application/json");
             request.AddBody(JsonSerializer.Serialize(nationalTeam));
-            var response = client.Post(request);
+            RestResponse response = client.ExecutePost(request);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+            {
+                return View("BadRequestError", new BadRequestViewModel { Message = "Debes ingresar datos vállidos."});
+            }
 
             return RedirectToAction("Index", "Admin");
         }
