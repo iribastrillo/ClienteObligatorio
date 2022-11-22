@@ -19,6 +19,15 @@ namespace Cliente.Controllers
         {
             var client = new RestClient("https://localhost:44348/api/match");
             var request = new RestRequest();
+            DateTime dateTime;
+
+            try
+            {
+                dateTime = new DateTime(2022, admin.Month, admin.Day, admin.Hour, 0, 0);
+            } catch
+            {
+                return View("BadRequestError", new BadRequestViewModel { Message = "Debes ingresar una fecha válida." });
+            }
 
             MatchDTO match = new MatchDTO
             {
