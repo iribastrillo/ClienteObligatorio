@@ -1,4 +1,5 @@
-﻿using Cliente.Models.DTOs;
+﻿using Cliente.Filters;
+using Cliente.Models.DTOs;
 using Cliente.Models.VMs;
 using Cliente.Models.VMs.Errors;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using System.Text.Json;
 
 namespace Cliente.Controllers
 {
+    [AdminOnly]
     public class NationalTeamController : Controller
     {
         public IActionResult Create(AdminViewModel admin)

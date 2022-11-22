@@ -1,4 +1,5 @@
-﻿using Cliente.Models;
+﻿using Cliente.Filters;
+using Cliente.Models;
 using Cliente.Models.DTOs;
 using Cliente.Models.VMs;
 using Cliente.Models.VMs.Errors;
@@ -10,6 +11,7 @@ using System.Text.Json;
 
 namespace Cliente.Controllers
 {
+    [AdminOnly]
     public class MatchController : Controller
     {
         [HttpPost]
