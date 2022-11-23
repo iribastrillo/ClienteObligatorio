@@ -54,6 +54,31 @@ namespace Cliente.Controllers
             ViewBag.idCountry = team.idCountry;
             return View(team);
         }
+        public IActionResult GetById(int idNT)
+        {
+            var client = new RestClient("https://localhost:44348/api/nationalteams/" + idNT);
+            var request = new RestRequest();
+
+            request.AddHeader("Content-Type", "application/json");
+
+            RestResponse rResponse = client.ExecuteGet(request);
+            if (rResponse.StatusCode == System.Net.HttpStatusCode.BadRequest)
+            {
+                return View("BadRequestError", new BadRequestViewModel { Message = rResponse.Content });
+            }
+
+            var response = client.Get(request);
+
+            JsonSerializerOptions options = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = true
+            };
+
+            var nt = JsonSerializer.Deserialize<NationalTeamViewModel>(response.Content, options);
+
+            return View(nt);
+        }
 
         [HttpPost]
         public IActionResult Update(NationalTeamViewModel nt)

@@ -7,8 +7,8 @@
         public string isoAlfa3 { get; set; }
         public decimal gdp { get; set; }
         public decimal population { get; set; }
-        public string Image { get; set; }
-        public string Region { get; set; }
+        public string image { get; set; }
+        public string region { get; set; }
     }
 }
 

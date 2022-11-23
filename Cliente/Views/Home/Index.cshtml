@@ -25,6 +25,20 @@
                 <input class="btn btn-outline-light btn-block" type="submit" value="Buscar" />
             </div>
         </form>
+        @* Búsqueda por id National Team *@
+
+        <form class="d-flex flex-column justify-content.center" method="get" asp-controller="NationalTeam" asp-action="GetById">
+            <div class="form-group row">
+                <select id="idNT" name="idNT" class="col-12 form-control form-control-lg mb-1">
+                    @foreach (var nt in ViewBag.Response)
+                    {
+                        <option value="@nt.id">@nt.name</option>
+                    }
+                </select>
+                <input class="btn btn-outline-light btn-block" type="submit" value="Buscar" />
+            </div>
+        </form>
+
         @if (@Context.Session.GetString("role") == "Admin" || (@Context.Session.GetString("role") == "Apostador"))
         {
 
