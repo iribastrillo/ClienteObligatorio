@@ -35,6 +35,14 @@ namespace Cliente.Controllers
 
             ViewBag.Countries = countries;
 
+            client = new RestClient("https://localhost:44348/api/nationalteams/withoutgroup");
+            request = new RestRequest();
+            request.AddHeader("Content-Type", "application/json");
+            response = client.ExecuteGet(request);
+
+            var ntWithoutGroup = JsonSerializer.Deserialize<IEnumerable<NationalTeamViewModel>>(response.Content, options);
+
+            ViewBag.ntWithoutGroup = ntWithoutGroup;
             return View();
         }
     }

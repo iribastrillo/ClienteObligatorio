@@ -62,6 +62,23 @@
                 <input type="submit" value="Crear" class="btn btn-outline-success btn-block" />
             </div>
         </form>
+        <form class="p-3 granite rounded" asp-controller="GroupStage" asp-action="AssignNTtoGS" method="post">
+            <select name="idGroup" id="idGroup" class="form-select d-block form-control-lg">
+                @foreach (var group in ViewBag.Groups)
+                {
+                    <option value="@group.id">Grupo @group.group</option>
+                }
+            </select>
+            <select name="idNationalTeam" id="idNationalTeam" class="form-select d-block form-control-lg">
+                @foreach (var nt in ViewBag.ntWithoutGroup)
+                {
+                    <option value="@nt.id">@nt.name</option>
+                }
+            </select>
+            <div class="form-group">
+                <input type="submit" value="Asignar" class="btn btn-outline-success btn-block" />
+            </div>
+        </form>
     </div>
     <div class="col-4">
         <form class="p-3 granite rounded" asp-controller="GroupStage" asp-action="Create">
@@ -152,6 +169,16 @@
                             <form class="d-inline" asp-controller="NationalTeam" asp-action="Update" method="get">
                                 <input type="number" name="id" value="@team.id" hidden />
                                 <input class="btn btn-outline-danger" type="submit" value="Editar" />
+                            </form>
+                            <form class="d-inline" asp-controller="GroupStage" asp-action="AssignNTtoGS" method="post">
+                                <input type="number" name="idNationalTeam" id="idNationalTeam" value="@team.id" hidden />
+                                <select name="idGroup" id="idGroup" class="form-select form-control-lg">
+                                    @foreach (var gs in ViewBag.Groups)
+                                    {
+                                        <option value="@gs.id">Grupo @gs.group</option>
+                                    }
+                                </select>
+                                <input class="btn btn-outline-danger" type="submit" value="Re-Asignar" />
                             </form>
                         </div>
                     </div>

@@ -61,6 +61,22 @@ namespace Cliente.Controllers
             }
         }
         [AdminOnly]
+        [HttpPost]
+        public IActionResult AssignNTtoGS(int idGroup, int idNationalTeam)
+        {
+            var client = new RestClient($"https://localhost:44348/api/groupsstage/group/{idGroup}/nationalteam/{idNationalTeam}");
+            var request = new RestRequest();
+
+            request.AddHeader("Content-Type", "application/json");
+
+            RestResponse response = client.ExecutePut(request);
+            if(response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+            {
+                return View("BadRequestError", new BadRequestViewModel { Message = response.Content });
+            }
+            return RedirectToAction("Index", "Admin");
+        }
+        [AdminOnly]
         public IActionResult Edit(int id, string group)
         {
             GroupStageDTO groupStage = new GroupStageDTO(id, group);
