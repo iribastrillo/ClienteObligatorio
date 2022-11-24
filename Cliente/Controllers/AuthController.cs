@@ -62,6 +62,7 @@ namespace Cliente.Controllers
         [HttpGet]
         public IActionResult SignUp ()
         {
+            ViewBag.ErrorMessage = "";
             return View();
         }
         [HttpPost]
@@ -75,7 +76,8 @@ namespace Cliente.Controllers
                 return View ("Index", "Auth");
             } catch (Exception e)
             {
-                throw new Exception(e.Message);
+                ViewBag.ErrorMessage = e.Message;
+                return View();
             }
 
         }

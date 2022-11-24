@@ -13,12 +13,7 @@ namespace Cliente.Mapper
                 return null;
             }
 
-            return new User
-            {
-                Username = new UsernameValue (userVM.Username),
-                Password = new PasswordValue (userVM.Password),
-                Email = new EmailValue (userVM.Email)
-            };
+            return new User(userVM.Username, userVM.Password, userVM.Email);
         }
     }
 }

@@ -6,8 +6,11 @@ namespace Domain.Entities
 {
     public class User : IEntity
     {
+        [Display(Name = "Nombre de usuario")]
         public UsernameValue Username { get; set; }
+        [Display(Name = "Contraseña")]
         public PasswordValue Password { get; set; }
+        [Display(Name = "Correo electrónico")]
         [EmailAddress]
         public EmailValue Email { get; set; }
         public int Id { get; set; }

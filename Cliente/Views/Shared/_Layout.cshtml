@@ -12,7 +12,15 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" style="color:#800000;" href="#">Gamble!</a>
+            @if (Context.Session.GetString("role") == null)
+            {
+                <a asp-controller="Auth" asp-action="Index" class="navbar-brand" style="color:#800000;">Gamble!</a>
+            }
+            else
+            {
+                <a asp-controller="Home" asp-action="Index" class="navbar-brand" style="color:#800000;">Gamble!</a>
+            }
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
