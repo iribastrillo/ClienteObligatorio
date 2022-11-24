@@ -55,6 +55,7 @@ namespace Cliente.Controllers
             ViewBag.idCountry = team.idCountry;
             return View(team);
         }
+        [LoggedInOnly]
         public IActionResult GetById(int idNT)
         {
             var client = new RestClient("https://localhost:44348/api/nationalteams/" + idNT);

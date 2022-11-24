@@ -29,6 +29,7 @@
 
         <form class="d-flex flex-column justify-content.center" method="get" asp-controller="NationalTeam" asp-action="GetById">
             <div class="form-group row">
+                <label for="idNT">Buscá una selección:</label>
                 <select id="idNT" name="idNT" class="col-12 form-control form-control-lg mb-1">
                     @foreach (var nt in ViewBag.Response)
                     {
