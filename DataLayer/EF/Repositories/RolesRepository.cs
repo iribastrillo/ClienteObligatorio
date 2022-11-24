@@ -32,14 +32,14 @@ namespace DataLayer.EF.Repositories
             Roles relacion = (from relation in _context.RolesDeUsuarios
                               where relation.UserId == user.Id && relation.RolId == role
                               select relation).FirstOrDefault();
+            if (relacion == null)
+            {
+                throw new Exception("Parece que estás intentando ingresar con un rol que no tienes.");
+            }
             Rol rol = (from r in _context.Roles
                        where r.Id == relacion.RolId
                        select r).FirstOrDefault();
 
-            if (relacion == null)
-            {
-                throw new Exception("Invalid role selected.");
-            }
             return rol;
         }
 

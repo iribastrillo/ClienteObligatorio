@@ -31,6 +31,7 @@ namespace Cliente.Controllers
         [HttpGet]
         public IActionResult Login ()
         {
+            ViewBag.ErrorMessage = "";
             ViewBag.Roles = _UCListAll.FindAll();
             return View();
         }
@@ -45,8 +46,9 @@ namespace Cliente.Controllers
                 HttpContext.Session.SetString("username", username);
                 HttpContext.Session.SetString("role", rol.descriptor);
                 return RedirectToAction("Index", "Home");
-            } catch
+            } catch (Exception e)
             {
+                ViewBag.ErrorMessage = e.Message;
                 return View();
             }     
         }
