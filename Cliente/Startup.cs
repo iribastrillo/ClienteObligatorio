@@ -33,6 +33,8 @@ namespace Cliente
 
             services.AddScoped<IRepositoryUser, UserRepository>();
             services.AddScoped<IRepositoryRoles, RolesRepository>();
+            services.AddScoped<IRolRepository, RolRepository>();
+            services.AddScoped<IListAll, UCListRol>();
             services.AddScoped<ILogin, UCLogin>();
             services.AddScoped<ISignUp, UCSignUp>();
             services.AddScoped<IAssignDefault, UCAssignDefaultRole>();

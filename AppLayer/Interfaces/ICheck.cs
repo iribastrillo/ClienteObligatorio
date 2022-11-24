@@ -7,6 +7,6 @@ namespace AppLayer.Interfaces
 {
     public interface ICheck
     {
-        public Rol Check(User user);
+        public Rol Check(int role, User user);
     }
 }

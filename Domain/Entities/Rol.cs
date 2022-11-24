@@ -6,5 +6,6 @@ namespace Domain.Entities
     {
         public int Id { get; set; }
         public string descriptor { get; set; }
+        public string descripcion { get; set; }
     }
 }

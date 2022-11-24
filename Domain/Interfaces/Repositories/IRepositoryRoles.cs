@@ -8,6 +8,6 @@ namespace Domain.Interfaces.Repositories
     public interface IRepositoryRoles : IRepository<Roles>
     {
         public void AssignDefaultRole(User user);
-        public Rol Check(User user);
+        public Rol Check(int role, User user);
     }
 }

@@ -12,9 +12,9 @@ namespace AppLayer.UseCases
             _repository = repository;
         }
 
-        public Rol Check(User user)
+        public Rol Check(int role, User user)
         {
-            return _repository.Check(user);
+            return _repository.Check(role, user);
         }
     }
 }

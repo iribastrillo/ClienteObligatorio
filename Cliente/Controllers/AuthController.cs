@@ -14,13 +14,15 @@ namespace Cliente.Controllers
         private ISignUp _UCSignUp;
         private IAssignDefault _UCAssignDefault;
         private ICheck _UCCheck;
+        private IListAll _UCListAll;
 
-        public AuthController (ILogin UCLogin, ISignUp UCSignUp, IAssignDefault UCAssignDefault, ICheck UCCheck)
+        public AuthController (ILogin UCLogin, ISignUp UCSignUp, IAssignDefault UCAssignDefault, ICheck UCCheck, IListAll UCListAll)
         {
             _UCLogin = UCLogin;
             _UCSignUp = UCSignUp;
             _UCAssignDefault = UCAssignDefault;
             _UCCheck = UCCheck;
+            _UCListAll = UCListAll;
         }
         public IActionResult Index()
         {
@@ -29,15 +31,17 @@ namespace Cliente.Controllers
         [HttpGet]
         public IActionResult Login ()
         {
+            ViewBag.Roles = _UCListAll.FindAll();
             return View();
         }
         [HttpPost]
-        public IActionResult Login (string username, string password)
+        public IActionResult Login (string username, string password, int role)
         {
+            ViewBag.Roles = _UCListAll.FindAll();
             try
             {
                 User user = _UCLogin.DoLogin(username, password);
-                Rol rol = _UCCheck.Check(user);
+                Rol rol = _UCCheck.Check(role, user);
                 HttpContext.Session.SetString("username", username);
                 HttpContext.Session.SetString("role", rol.descriptor);
                 return RedirectToAction("Index", "Home");
