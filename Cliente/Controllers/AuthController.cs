@@ -14,13 +14,15 @@ namespace Cliente.Controllers
         private ISignUp _UCSignUp;
         private IAssignDefault _UCAssignDefault;
         private ICheck _UCCheck;
+        private IListAll _UCListAll;
 
-        public AuthController (ILogin UCLogin, ISignUp UCSignUp, IAssignDefault UCAssignDefault, ICheck UCCheck)
+        public AuthController (ILogin UCLogin, ISignUp UCSignUp, IAssignDefault UCAssignDefault, ICheck UCCheck, IListAll UCListAll)
         {
             _UCLogin = UCLogin;
             _UCSignUp = UCSignUp;
             _UCAssignDefault = UCAssignDefault;
             _UCCheck = UCCheck;
+            _UCListAll = UCListAll;
         }
         public IActionResult Index()
         {
@@ -29,20 +31,24 @@ namespace Cliente.Controllers
         [HttpGet]
         public IActionResult Login ()
         {
+            ViewBag.ErrorMessage = "";
+            ViewBag.Roles = _UCListAll.FindAll();
             return View();
         }
         [HttpPost]
-        public IActionResult Login (string username, string password)
+        public IActionResult Login (string email, string password, int role)
         {
+            ViewBag.Roles = _UCListAll.FindAll();
             try
             {
-                User user = _UCLogin.DoLogin(username, password);
-                Rol rol = _UCCheck.Check(user);
-                HttpContext.Session.SetString("username", username);
+                User user = _UCLogin.DoLogin(email, password);
+                Rol rol = _UCCheck.Check(role, user);
+                HttpContext.Session.SetString("username", user.Username.Value);
                 HttpContext.Session.SetString("role", rol.descriptor);
                 return RedirectToAction("Index", "Home");
-            } catch
+            } catch (Exception e)
             {
+                ViewBag.ErrorMessage = e.Message;
                 return View();
             }     
         }

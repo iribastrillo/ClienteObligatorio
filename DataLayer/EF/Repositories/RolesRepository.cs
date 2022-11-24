@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DataLayer.EF.Repositories
@@ -26,14 +27,19 @@ namespace DataLayer.EF.Repositories
             _context.SaveChanges();
         }
 
-        public Rol Check(User user)
+        public Rol Check(int role, User user)
         {
-            Roles relacion = _context.RolesDeUsuarios.FirstOrDefault(r => r.UserId == user.Id);
-            Rol rol = _context.Roles.FirstOrDefault(r => r.Id == relacion.RolId);
+            Roles relacion = (from relation in _context.RolesDeUsuarios
+                              where relation.UserId == user.Id && relation.RolId == role
+                              select relation).FirstOrDefault();
             if (relacion == null)
             {
-                throw new Exception("User has not a defined role.");
+                throw new Exception("Parece que estás intentando ingresar con un rol que no tienes.");
             }
+            Rol rol = (from r in _context.Roles
+                       where r.Id == relacion.RolId
+                       select r).FirstOrDefault();
+
             return rol;
         }
 

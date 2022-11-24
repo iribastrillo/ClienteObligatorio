@@ -5,8 +5,9 @@ using System.Text;
 
 namespace Domain.Interfaces.Repositories
 {
-    public interface IRepositoryUser : IRepository<User>
+    public interface IRolRepository
     {
-        public User Find(string email, string password);
+        public IEnumerable<Rol> FindAll();
+        public Rol FindByID();
     }
 }
