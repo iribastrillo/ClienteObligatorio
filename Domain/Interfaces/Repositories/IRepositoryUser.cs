@@ -7,6 +7,6 @@ namespace Domain.Interfaces.Repositories
 {
     public interface IRepositoryUser : IRepository<User>
     {
-        public User Find(string username, string password);
+        public User Find(string email, string password);
     }
 }

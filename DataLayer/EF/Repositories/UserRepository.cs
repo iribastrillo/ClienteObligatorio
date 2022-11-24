@@ -25,10 +25,10 @@ namespace DataLayer.EF.Repositories
             _context.Users.Add(o);
             _context.SaveChanges();
         }
-        public User Find(string username, string password)
+        public User Find(string email, string password)
         {
             IEnumerable<User> users = from u in _context.Users
-                                      where u.Username.Value == username && u.Password.Value == password
+                                      where u.Email.Value == email && u.Password.Value == password
                                       select u;
             User user = users.FirstOrDefault();
             return user;

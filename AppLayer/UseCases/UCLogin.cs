@@ -13,9 +13,9 @@ namespace AppLayer.UseCases
         {
             _repository = repository;
         }
-        public User DoLogin(string username, string password)
+        public User DoLogin(string email, string password)
         {
-            User found = _repository.Find(username, password);
+            User found = _repository.Find(email, password);
             if (found == null)
             {
                 throw new Exception("Invalid login credentials.");

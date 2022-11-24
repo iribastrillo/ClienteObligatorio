@@ -36,14 +36,14 @@ namespace Cliente.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Login (string username, string password, int role)
+        public IActionResult Login (string email, string password, int role)
         {
             ViewBag.Roles = _UCListAll.FindAll();
             try
             {
-                User user = _UCLogin.DoLogin(username, password);
+                User user = _UCLogin.DoLogin(email, password);
                 Rol rol = _UCCheck.Check(role, user);
-                HttpContext.Session.SetString("username", username);
+                HttpContext.Session.SetString("username", user.Username.Value);
                 HttpContext.Session.SetString("role", rol.descriptor);
                 return RedirectToAction("Index", "Home");
             } catch (Exception e)
