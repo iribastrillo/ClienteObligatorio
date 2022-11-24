@@ -63,7 +63,10 @@
             </div>
         </form>
         <form class="p-3 granite rounded" asp-controller="GroupStage" asp-action="AssignNTtoGS" method="post">
-            <select name="idGroup" id="idGroup" class="form-select d-block form-control-lg">
+            <h5>Asignar Selección</h5>
+            <p>
+                Recordá que los grupos no pueden tener más de 4 selecciones.
+            </p><select name="idGroup" id="idGroup" class="form-select d-block form-control-lg">
                 @foreach (var group in ViewBag.Groups)
                 {
                     <option value="@group.id">Grupo @group.group</option>

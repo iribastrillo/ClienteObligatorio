@@ -16,5 +16,7 @@ namespace Cliente.Models.VMs
         public int bettors { get; set; }
         [Display(Name = "ID del país")]
         public int idCountry { get; set; }
+        public CountryViewModel country { get; set; }
+
     }
 }

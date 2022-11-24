@@ -4,6 +4,7 @@ using Cliente.Models.VMs;
 using Cliente.Models.VMs.Errors;
 using Microsoft.AspNetCore.Mvc;
 using RestSharp;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
 
@@ -53,6 +54,55 @@ namespace Cliente.Controllers
             ViewBag.idNT = id;
             ViewBag.idCountry = team.idCountry;
             return View(team);
+        }
+        public IActionResult GetById(int idNT)
+        {
+            var client = new RestClient("https://localhost:44348/api/nationalteams/" + idNT);
+            var request = new RestRequest();
+
+            request.AddHeader("Content-Type", "application/json");
+
+            RestResponse rResponse = client.ExecuteGet(request);
+            if (rResponse.StatusCode == System.Net.HttpStatusCode.BadRequest)
+            {
+                return View("BadRequestError", new BadRequestViewModel { Message = rResponse.Content });
+            }
+
+            var response = client.Get(request);
+
+            JsonSerializerOptions options = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = true
+            };
+
+            var nt = JsonSerializer.Deserialize<NationalTeamViewModel>(response.Content, options);
+
+            return View(nt);
+        }
+
+        public IActionResult getAllNT()
+        {
+            var client = new RestClient("https://localhost:44348/api/nationalteams");
+            var request = new RestRequest();
+
+            request.AddHeader("Content-Type", "application/json");
+
+            RestResponse rResponse = client.ExecuteGet(request);
+            if(rResponse.StatusCode == System.Net.HttpStatusCode.BadRequest)
+            {
+                return View("BadRequestError", new BadRequestViewModel { Message = rResponse.Content });
+            }
+
+            JsonSerializerOptions options = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = true
+            };
+
+            var nts = JsonSerializer.Deserialize<IEnumerable<NationalTeamViewModel>>(rResponse.Content, options);
+
+            return View(nts);
         }
 
         [HttpPost]

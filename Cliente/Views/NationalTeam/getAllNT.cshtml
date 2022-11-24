@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Cliente.Models.VMs.NationalTeamViewModel>
+
+@{
+    ViewData["Title"] = "getAllNT";
+}
+
+<h1>getAllNT</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.bettors)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.idCountry)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.country.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.country.isoAlfa3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.country.image)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.bettors)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.idCountry)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.country.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.country.isoAlfa3)
+            </td>
+            <td>
+                <img class="img-thumbnail" style="width: 128px;" src="https://localhost:44331/img/countries/@Html.DisplayFor(modelItem => item.country.image)" />
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

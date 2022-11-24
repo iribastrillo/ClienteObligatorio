@@ -45,6 +45,13 @@
                             <a class="nav-link" asp-controller="Search" asp-action="GetAllMatches">Partidos</a>
                         </li>
                     }
+                    @if (Context.Session.GetString("role") != null)
+                    {
+                        <li class="nav-item active">
+                            <a class="nav-link" asp-controller="NationalTeam" asp-action="getAllNT">Selecciones Nacionales</a>
+                        </li>
+                    }
+
 
 
                 </ul>
