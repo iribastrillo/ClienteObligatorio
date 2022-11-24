@@ -1,8 +1,6 @@
 ﻿using Domain.Interfaces;
 using Domain.VO;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Entities
 {
@@ -10,6 +8,7 @@ namespace Domain.Entities
     {
         public UsernameValue Username { get; set; }
         public PasswordValue Password { get; set; }
+        [EmailAddress]
         public EmailValue Email { get; set; }
         public int Id { get; set; }
         public User()
