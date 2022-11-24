@@ -7,7 +7,7 @@ namespace Cliente.Models.VMs
 {
     public class TableGroupNTsViewModel
     {
-        public string country { get; set; }
+        public CountryViewModel country { get; set; }
         public int pts { get; set; }
         public int goalsScored { get; set; }
         public int goalsAgainst { get; set; }

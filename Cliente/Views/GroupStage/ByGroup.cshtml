@@ -10,8 +10,12 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.country)
+                @Html.DisplayNameFor(model => model.country.image)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.country.name)
+            </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.pts)
             </th>
@@ -36,7 +40,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.country)
+                <img class="img-thumbnail" style="width: 128px;" src="https://localhost:44331/img/countries/@Html.DisplayFor(modelItem => item.country.image)" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.country.name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.pts)
